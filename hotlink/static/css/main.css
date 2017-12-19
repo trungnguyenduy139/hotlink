@@ -47,8 +47,7 @@ h2 a {
     color: #FF0031;
 }
 
-button, input[type="button"], input[type="reset"], input[type="submit"]
-{
+button, input[type="button"], input[type="reset"], input[type="submit"] {
     cursor: pointer;
     -webkit-appearance: button;
     -webkit-border-radius: 4px;
