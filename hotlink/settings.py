@@ -1,11 +1,5 @@
 # Django settings for hotlink project.
-import os
-import sys
 
-reload(sys)
-sys.setdefaultencoding('utf-8')
-# Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
@@ -89,7 +83,7 @@ STATICFILES_FINDERS = (
 )
 
 # Make this unique, and don't share it with anybody.
-SECRET_KEY = '#v=h3qq5b8!z33p$lmjr$tbx1ue_95ee6tu%z%z98t-78i$gtd'
+SECRET_KEY = 'g3pn)t)h(k8ek8%rkeh+hhhklxhx+!n03b9kl0@^xuf9pzcqt!'
 
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (
@@ -127,14 +121,18 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.admin',
+    'django.contrib.comments',
     'registration',
+
     'links',
-    'hotlink'
-    # Uncomment the next line to enable the admin:
-    # 'django.contrib.admin',
-    # Uncomment the next line to enable admin documentation:
-    # 'django.contrib.admindocs',
+    'hotlink',
 )
+
+from django.core.urlresolvers import reverse_lazy
+
+LOGIN_URL = reverse_lazy("login")
+LOGIN_REDIRECT_URL = reverse_lazy("home")
+LOGOUT_URL = reverse_lazy("logout")
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
@@ -164,5 +162,3 @@ LOGGING = {
         },
     }
 }
-
-TEMPLATE_DIRS = (os.path.join(BASE_DIR, 'templates'),)
