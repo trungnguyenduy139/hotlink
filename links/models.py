@@ -30,7 +30,10 @@ class Link(models.Model):
 
     @property
     def time_ago(self):
-        return timesince(self.submitted_on).split(",")[0]
+        return_time = timesince(self.submitted_on).split(",")[0] + " ago"
+        if return_time == "0 minutes ago":
+            return_time = "just now"
+        return return_time
 
     @property
     def hostname(self):
