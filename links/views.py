@@ -24,8 +24,9 @@ from django.contrib.comments.models import Comment
 class RandomGossipMixin(object):
     def get_context_data(self, **kwargs):
         context = super(RandomGossipMixin, self).get_context_data(**kwargs)
-        if Comment.objects.all().__len__() != 0:
-            context[u"randomquip"] = Comment.objects.order_by('?')[0]
+        my_objects = Comment.objects
+        if my_objects.all().__len__() != 0:
+            context[u"randomquip"] = my_objects.order_by('?')[0]
         return context
 
 

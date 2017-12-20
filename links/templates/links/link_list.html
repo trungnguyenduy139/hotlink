@@ -20,20 +20,26 @@
             {% else %}
                 <button>-</button>
             {% endif %}
-            <a target="_blank" href="{{ link.url }}">
+            <a style="font-size: 23px; text-decoration: underline !important;" target="_blank" href="{{ link.url }}">
                 <b>{{ link.title }}</b>
-                <a target="_blank"
-                   href="{% url 'link_detail' pk=link.pk %}"> {% get_comment_count for link as comment_count %}
-                    {{ comment_count }} comment{{ comment_count|pluralize }}</a>
+
             </a>
         </li>
+        <a style="font-size: 18px; font-style: italic; color: #000000" target="_blank"
+           href="{% url 'profile' slug=user.username %}">Đăng bởi: {{ link.submitter }} | </a>
+        <a style="font-size: 18px; color: #000000" target="_blank"
+           href="{% url 'link_detail' pk=link.pk %}"> {% get_comment_count for link as comment_count %}
+            {{ comment_count }} comment{{ comment_count|pluralize }}</a>
     </form>
 {% endfor %}
 </ol>
 {% if is_paginated %}
     <div class="pagination">
+        {% if page_obj.has_previous %}
+            <a href="?page={{ page_obj.previous_page_number }}">&larr; Previous | </a>
+        {% endif %}
         {% if page_obj.has_next %}
-            <a href="?page={{ page_obj.next_page_number }}">More &raquo;</a>
+            <a href="?page={{ page_obj.next_page_number }}">Next &srarr;</a>
         {% endif %}
     </div>
 {% endif %}
