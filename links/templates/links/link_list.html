@@ -26,10 +26,12 @@
             </a>
         </li>
         <a style="font-size: 18px; font-style: italic; color: #000000" target="_blank"
-           href="{% url 'profile' slug=user.username %}">Đăng bởi: {{ link.submitter }} | </a>
+           href="{% url 'profile' slug=user.username %}">{{ link.time_ago }} ago - Đăng bởi: {{ link.submitter }} | </a>
         <a style="font-size: 18px; color: #000000" target="_blank"
            href="{% url 'link_detail' pk=link.pk %}"> {% get_comment_count for link as comment_count %}
-            {{ comment_count }} comment{{ comment_count|pluralize }}</a>
+            {{ comment_count }} comment{{ comment_count|pluralize }} | Nguồn:</a>
+        <a style="font-size: 18px; text-decoration: underline; color: #2196F3" target="_blank"
+           href="{{ link.hostname }}">{{ link.domain }}</a>
     </form>
 {% endfor %}
 </ol>

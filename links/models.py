@@ -3,6 +3,12 @@ from django.contrib.auth.models import User
 from django.db.models import Count
 from django.core.urlresolvers import reverse
 from django.utils.timezone import now
+from django.template.defaultfilters import timesince
+
+try:
+    from urllib.parse import urlparse
+except ImportError:
+    from urlparse import urlparse
 
 
 class LinkVoteCountManager(models.Manager):
@@ -21,6 +27,20 @@ class Link(models.Model):
 
     with_votes = LinkVoteCountManager()
     objects = models.Manager()  # default manager
+
+    @property
+    def time_ago(self):
+        return timesince(self.submitted_on).split(",")[0]
+
+    @property
+    def hostname(self):
+        parsed_uri = urlparse(self.url)
+        domain = '{uri.scheme}://{uri.netloc}/'.format(uri=parsed_uri)
+        return domain
+
+    @property
+    def domain(self):
+        return urlparse(self.url).netloc
 
     def __unicode__(self):
         return self.title
