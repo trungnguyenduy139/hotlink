@@ -20,10 +20,11 @@
             {% else %}
                 <button>-</button>
             {% endif %}
-            <a href="{% url 'link_detail' pk=link.pk %}">
+            <a target="_blank" href="{{ link.url }}">
                 <b>{{ link.title }}</b>
-                {% get_comment_count for link as comment_count %}
-                {{ comment_count }} comment{{ comment_count|pluralize }}
+                <a target="_blank"
+                   href="{% url 'link_detail' pk=link.pk %}"> {% get_comment_count for link as comment_count %}
+                    {{ comment_count }} comment{{ comment_count|pluralize }}</a>
             </a>
         </li>
     </form>
