@@ -1,6 +1,5 @@
 import json
 from django.http import HttpResponse
-from django.shortcuts import redirect
 from django.shortcuts import get_object_or_404
 from django.views.generic import ListView
 from django.views.generic import DetailView
@@ -32,7 +31,7 @@ class RandomGossipMixin(object):
 
 class LinkListView(RandomGossipMixin, ListView):
     model = Link
-    queryset = Link.with_votes.all()
+    queryset = Link.with_votes.order_by("-submitted_on")
     paginate_by = 5
 
     def get_context_data(self, **kwargs):
